@@ -27,9 +27,15 @@
 # #
 import pandas
 data = pandas.read_csv("nato_phonetic_alphabet.csv")
-df= pandas.DataFrame(data)
+df = pandas.DataFrame(data)
 data_dict = {row.letter: row.code for (index, row) in df.iterrows()}
-
-user_input = input("Please enter the name ").upper()
-final = [data_dict[letter] for letter in user_input]
-print(final)
+def generate_phonetic():
+    user_input = input("Please enter the name ").upper()
+    try:
+        final = [data_dict[letter] for letter in user_input]
+    except KeyError:
+        print("please you can enter names with only albhabet")
+        generate_phonetic()
+    else:
+        print(final)
+generate_phonetic()
